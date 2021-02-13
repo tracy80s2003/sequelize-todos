@@ -12,7 +12,6 @@ router.get('/api/todos', async (req, res) => {
 })
 
 router.post('/api/todos', async (req, res) => {
-
     try {
         // pause the code with await and create the record
         await db.Todo.create(req.body)
@@ -22,7 +21,18 @@ router.post('/api/todos', async (req, res) => {
     }
 })
 
-// router.put()
+router.put('/api/todos/:id', async (req,res) => {
+    try {
+        const id = req.params.id
+        // pause the code with "await" and update the record
+        await db.Todo.update(req.body, {
+            where: { id }
+        })
+        res.stats(200).send()
+    } catch(err) {
+        res.status(500).send(err)
+    }
+})
 
 router.delete('/api/todos/:id', async (req, res) => {
     try {
