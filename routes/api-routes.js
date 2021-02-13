@@ -24,6 +24,16 @@ router.post('/api/todos', async (req, res) => {
 
 // router.put()
 
-// router.delete()
+router.delete('/api/todos/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        await db.Todo.destroy({
+            where: { id }
+        })
+        res.status(200).send()
+    } catch(err) {
+        res.status(500).send(err)
+}
+})
 
 module.exports = router

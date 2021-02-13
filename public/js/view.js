@@ -42,5 +42,21 @@ document.addEventListener('DOMContentLoaded', (e) => {
     .catch(err => console.error(err))
   })
 
+  const deleteTodo = id => {
+    fetch(`/api/todos/${id}`, {
+      method: 'DELETE'
+    })
+    .then(getTodos)
+    .catch(err => console.error(err))
+  }
+
+  todoListSpan.addEventListener('click', e => {
+    const target = e.target
+    const id = target.getAttribute('data-id')
+    if (e.target.matches('.delete')) {
+      deleteTodo(id)
+    }
+  })
+
   getTodos()
 });
